@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+backend/venv/
+
+# Python generated/cache files
+backend/**/__pycache__/
+
+# Node
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Generated video/audio files
+backend/uploads/
+backend/outputs/
+backend/temp/
+
+# Environment variables
+.env
+backend/.env
+
+# macOS
+.DS_Store

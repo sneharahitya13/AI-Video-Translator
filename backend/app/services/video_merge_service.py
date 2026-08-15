@@ -2,11 +2,9 @@ import os
 import subprocess
 import uuid
 
-
 OUTPUT_FOLDER = "outputs"
 
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
-
 
 
 def merge_audio_video(video_path, audio_path):
@@ -16,9 +14,7 @@ def merge_audio_video(video_path, audio_path):
         f"translated_video_{uuid.uuid4()}.mp4"
     )
 
-
     command = [
-
         "ffmpeg",
 
         "-i",
@@ -39,14 +35,11 @@ def merge_audio_video(video_path, audio_path):
         "-shortest",
 
         output_video
-
     ]
-
 
     subprocess.run(
         command,
         check=True
     )
-
 
     return output_video
