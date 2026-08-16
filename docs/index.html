@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Multilingual Video Translator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 46px;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            max-width: 850px;
+            margin: auto;
+            font-size: 19px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        nav a {
+            color: #2563eb;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #4f46e5;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 25px;
+        }
+
+        section {
+            margin-bottom: 65px;
+        }
+
+        h2 {
+            color: #2563eb;
+            font-size: 30px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e5e7eb;
+        }
+
+        .card h3 {
+            color: #2563eb;
+        }
+
+        .architecture {
+            background: #111827;
+            color: #dbeafe;
+            padding: 30px;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        .architecture pre {
+            font-family: monospace;
+            font-size: 15px;
+        }
+
+        .workflow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .step {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .step-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .code {
+            background: #111827;
+            color: #d1d5db;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .code pre {
+            font-family: monospace;
+        }
+
+        .screenshot-box {
+            background: white;
+            border: 2px dashed #9ca3af;
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            color: #6b7280;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #111827;
+            color: #d1d5db;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 32px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header id="home">
+
+        <h1>AI Multilingual Video Translator</h1>
+
+        <p>
+            An AI-powered full-stack application that converts spoken
+            video content into multiple Indian languages using
+            speech recognition, machine translation, text-to-speech
+            and multimedia processing.
+        </p>
+
+    </header>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <a href="#overview">Overview</a>
+        <a href="#objectives">Objectives</a>
+        <a href="#technologies">Technologies</a>
+        <a href="#features">Features</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#run">How to Run</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#future">Future</a>
+
+    </nav>
+
+
+    <main>
+
+
+        <!-- OVERVIEW -->
+
+        <section id="overview">
+
+            <h2>1. Project Overview</h2>
+
+            <p>
+                The AI Multilingual Video Translator is a web-based
+                application designed to reduce language barriers in
+                video content.
+            </p>
+
+            <p>
+                The system processes spoken content from a video,
+                converts the speech into text, translates the text
+                into a selected Indian language and generates
+                translated speech.
+            </p>
+
+            <p>
+                The project combines Artificial Intelligence,
+                Natural Language Processing, Speech Processing,
+                and multimedia technologies in a full-stack
+                application.
+            </p>
+
+        </section>
+
+
+        <!-- OBJECTIVES -->
+
+        <section id="objectives">
+
+            <h2>2. Objectives</h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Speech Recognition</h3>
+                    <p>
+                        Convert spoken content from videos into
+                        text using AI-based speech recognition.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Language Translation</h3>
+                    <p>
+                        Translate the recognized text into
+                        multiple Indian regional languages.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Speech Generation</h3>
+                    <p>
+                        Generate audio from the translated text
+                        using text-to-speech technology.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Accessibility</h3>
+                    <p>
+                        Make digital video content accessible
+                        to users who speak different languages.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TECHNOLOGIES -->
+
+        <section id="technologies">
+
+            <h2>3. Technologies Used</h2>
+
+            <div>
+
+                <span class="badge">Python</span>
+                <span class="badge">FastAPI</span>
+                <span class="badge">React.js</span>
+                <span class="badge">JavaScript</span>
+                <span class="badge">Whisper</span>
+                <span class="badge">Google Translator</span>
+                <span class="badge">gTTS</span>
+                <span class="badge">FFmpeg</span>
+                <span class="badge">Axios</span>
+                <span class="badge">Git</span>
+                <span class="badge">GitHub</span>
+
+            </div>
+
+            <br>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>Frontend</h3>
+
+                    <p>
+                        React.js, Vite, JavaScript, HTML5,
+                        CSS3 and Axios are used to build
+                        the user interface and communicate
+                        with the backend API.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Backend</h3>
+
+                    <p>
+                        Python and FastAPI are used to
+                        create the backend API and handle
+                        video processing requests.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>AI / ML</h3>
+
+                    <p>
+                        OpenAI Whisper is used for speech
+                        recognition. Google Translator is
+                        used for text translation.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Speech & Multimedia</h3>
+
+                    <p>
+                        gTTS is used for text-to-speech
+                        generation and FFmpeg is used
+                        for audio/video processing.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES -->
+
+        <section id="features">
+
+            <h2>4. Key Features</h2>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>Video Processing</h3>
+
+                    <p>
+                        Process uploaded video files and
+                        extract the required audio.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Speech-to-Text</h3>
+
+                    <p>
+                        Convert spoken video content into
+                        text using Whisper.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Multilingual Translation</h3>
+
+                    <p>
+                        Translate the recognized content
+                        into selected regional languages.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Text-to-Speech</h3>
+
+                    <p>
+                        Generate translated audio from
+                        the translated text.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>REST API</h3>
+
+                    <p>
+                        FastAPI provides backend endpoints
+                        for communication with the frontend.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Web Interface</h3>
+
+                    <p>
+                        React provides an interactive interface
+                        for interacting with the translation system.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ARCHITECTURE -->
+
+        <section id="architecture">
+
+            <h2>5. System Architecture</h2>
+
+            <div class="architecture">
+
+<pre>
+
+                    USER
+                     |
+                     v
+              React Frontend
+                     |
+                     | HTTP Request
+                     v
+              FastAPI Backend
+                     |
+                     v
+              Video Processing
+                     |
+                     v
+               Audio Extraction
+                     |
+                     v
+                  Whisper
+                     |
+                     v
+              Speech-to-Text
+                     |
+                     v
+            Translation Service
+                     |
+                     v
+              Translated Text
+                     |
+                     v
+                   gTTS
+                     |
+                     v
+            Translated Audio
+                     |
+                     v
+              Output Processing
+                     |
+                     v
+              React Frontend
+                     |
+                     v
+                    USER
+
+</pre>
+
+            </div>
+
+        </section>
+
+
+        <!-- WORKFLOW -->
+
+        <section id="workflow">
+
+            <h2>6. Project Workflow</h2>
+
+            <div class="workflow">
+
+                <div class="step">
+                    <div class="step-number">01</div>
+                    Upload Video
+                </div>
+
+                <div class="step">
+                    <div class="step-number">02</div>
+                    Extract Audio
+                </div>
+
+                <div class="step">
+                    <div class="step-number">03</div>
+                    Speech-to-Text
+                </div>
+
+                <div class="step">
+                    <div class="step-number">04</div>
+                    Translate Text
+                </div>
+
+                <div class="step">
+                    <div class="step-number">05</div>
+                    Generate Speech
+                </div>
+
+                <div class="step">
+                    <div class="step-number">06</div>
+                    Produce Output
+                </div>
+
+            </div>
+
+            <br>
+
+            <ol>
+
+                <li>
+                    User uploads a video through the frontend.
+                </li>
+
+                <li>
+                    The backend receives the video.
+                </li>
+
+                <li>
+                    FFmpeg extracts the audio from the video.
+                </li>
+
+                <li>
+                    Whisper converts speech into text.
+                </li>
+
+                <li>
+                    The recognized text is translated into
+                    the selected language.
+                </li>
+
+                <li>
+                    gTTS generates speech from the translated text.
+                </li>
+
+                <li>
+                    The generated output is returned to the
+                    frontend.
+                </li>
+
+            </ol>
+
+        </section>
+
+
+        <!-- HOW TO RUN -->
+
+        <section id="run">
+
+            <h2>7. How to Run the Project</h2>
+
+            <h3>Backend Setup</h3>
+
+            <div class="code">
+
+<pre>
+cd backend
+
+python -m venv venv
+
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+uvicorn main:app --reload
+</pre>
+
+            </div>
+
+
+            <h3>Frontend Setup</h3>
+
+            <div class="code">
+
+<pre>
+cd frontend
+
+npm install
+
+npm run dev
+</pre>
+
+            </div>
+
+
+            <h3>Local URLs</h3>
+
+            <div class="code">
+
+<pre>
+Frontend:
+http://localhost:5173
+
+Backend:
+http://127.0.0.1:8000
+</pre>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECT STRUCTURE -->
+
+        <section>
+
+            <h2>8. Project Structure</h2>
+
+            <div class="architecture">
+
+<pre>
+AI-Video-Translator/
+│
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   └── services/
+│   │
+│   ├── outputs/
+│   ├── temp/
+│   ├── uploads/
+│   ├── main.py
+│   ├── requirements.txt
+│   └── ...
+│
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   └── api.js
+│   │
+│   ├── public/
+│   ├── index.html
+│   └── package.json
+│
+├── docs/
+│   └── index.html
+│
+├── README.md
+└── .gitignore
+</pre>
+
+            </div>
+
+        </section>
+
+
+        <!-- SCREENSHOTS -->
+
+        <section id="screenshots">
+
+            <h2>9. Screenshots</h2>
+
+            <p>
+                Screenshots of the working application can
+                be added here to demonstrate the user
+                interface and translation workflow.
+            </p>
+
+            <div class="screenshot-box">
+
+                <h3>Application Home Page</h3>
+
+                <p>
+                    Add your frontend screenshot here.
+                </p>
+
+            </div>
+
+
+            <div class="screenshot-box">
+
+                <h3>Translation Result</h3>
+
+                <p>
+                    Add a screenshot showing the translated
+                    text or generated output here.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FUTURE -->
+
+        <section id="future">
+
+            <h2>10. Future Enhancements</h2>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>Voice Cloning</h3>
+
+                    <p>
+                        Generate translated speech while
+                        preserving characteristics of the
+                        original speaker's voice.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Lip Synchronization</h3>
+
+                    <p>
+                        Synchronize the speaker's lip movements
+                        with the generated translated speech.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Emotion Preservation</h3>
+
+                    <p>
+                        Preserve emotional characteristics
+                        during speech generation.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>More Languages</h3>
+
+                    <p>
+                        Expand support for additional Indian
+                        and international languages.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONCLUSION -->
+
+        <section>
+
+            <h2>11. Conclusion</h2>
+
+            <p>
+                The AI Multilingual Video Translator demonstrates
+                how Artificial Intelligence, Natural Language
+                Processing, Speech Recognition and multimedia
+                processing can be combined to create a practical
+                multilingual application.
+            </p>
+
+            <p>
+                The project provides a foundation for building
+                more advanced multilingual video communication
+                systems with future support for voice cloning,
+                lip synchronization and emotion-aware speech.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        <h3>AI Multilingual Video Translator</h3>
+
+        <p>
+            Artificial Intelligence • NLP • Speech Processing
+            • Machine Translation
+        </p>
+
+        <p>
+            Project Documentation
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
