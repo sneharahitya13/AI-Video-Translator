@@ -18,16 +18,18 @@ function SignUp({ onSignIn }) {
     setLoading(true);
 
     const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
+      email: email.trim(),
+      password: password,
       options: {
         data: {
-          name: name,
+         name: name.trim(),
         },
         emailRedirectTo: window.location.origin,
       },
-    });
+  });
 
+console.log("SIGN UP RESPONSE:", data);
+console.log("SIGN UP ERROR:", error);
     if (error) {
       setErrorMessage(error.message);
       setLoading(false);

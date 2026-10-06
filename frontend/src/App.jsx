@@ -56,18 +56,16 @@ function App() {
   // ==========================================
 
   useEffect(() => {
-    if (authLoading) {
-      return;
-    }
+  if (authLoading) {
+    return;
+  }
 
-    if (session) {
-      if (page === "signin" || page === "signup") {
-        setPage("home");
-      }
-    } else {
-      setPage("signin");
+  if (session) {
+    if (page === "signin" || page === "signup") {
+      setPage("home");
     }
-  }, [session, authLoading, page]);
+  }
+}, [session, authLoading]);
 
   // ==========================================
   // TRANSLATE VIDEO
