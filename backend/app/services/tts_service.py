@@ -10,6 +10,14 @@ os.makedirs(
     OUTPUT_FOLDER,
     exist_ok=True
 )
+LANGUAGE_CODES = {
+    "English": "en",
+    "Telugu": "te",
+    "Tamil": "ta",
+    "Kannada": "kn",
+    "Malayalam": "ml",
+    "Hindi": "hi"
+}
 
 
 def text_to_speech(
@@ -45,11 +53,19 @@ def text_to_speech(
 
    
 
+    language_code = LANGUAGE_CODES.get(
+       language,
+        language
+)
+
     speech = gTTS(
-        text=text,
-        lang=language,
-        slow=False
-    )
+       text=text,
+       lang=language_code,
+       slow=False
+)
+        
+
+
 
     speech.save(raw_path)
 

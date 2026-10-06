@@ -1,79 +1,169 @@
-from deep_translator import GoogleTranslator
+# backend/app/services/translation_service.py
+
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 
-# Supported languages
+
+
+MODEL_NAME = "facebook/nllb-200-distilled-600M"
+
+
+
+
+
 LANGUAGE_CODES = {
-
-    "English": "en",
-    "Telugu": "te",
-    "Tamil": "ta",
-    "Hindi": "hi",
-    "Kannada": "kn",
-    "Malayalam": "ml"
-
+    "English": "eng_Latn",
+    "Telugu": "tel_Telu",
+    "Tamil": "tam_Taml",
+    "Kannada": "kan_Knda",
+    "Malayalam": "mal_Mlym",
+    "Hindi": "hin_Deva",
 }
 
 
 
-def get_language_code(language):
 
+print("Loading NLLB translation model...")
+
+tokenizer = AutoTokenizer.from_pretrained(
+    MODEL_NAME
+)
+
+model = AutoModelForSeq2SeqLM.from_pretrained(
+    MODEL_NAME
+)
+
+print("NLLB model loaded successfully.")
+
+
+
+
+def get_language_code(language: str) -> str:
+
+    if not language:
+        raise ValueError(
+            "Target language is required."
+        )
+
+    language = language.strip()
+
+    
     if language in LANGUAGE_CODES:
         return LANGUAGE_CODES[language]
 
-    return language
+    
+    if language in LANGUAGE_CODES.values():
+        return language
 
-
-
-def translate_text(text, target_language):
-
-    if not text:
-        return ""
-
-
-    target_language = get_language_code(target_language)
-
-
-    translator = GoogleTranslator(
-        source="auto",
-        target=target_language
+    raise ValueError(
+        f"Unsupported language: {language}. "
+        f"Supported languages: "
+        f"{', '.join(LANGUAGE_CODES.keys())}"
     )
 
 
-    translated_text = translator.translate(text)
 
 
-    return translated_text
+def translate_text(
+    text: str,
+    source_language: str,
+    target_language: str
+) -> str:
 
+    if not text or not text.strip():
+        return ""
 
+    source_code = get_language_code(
+        source_language
+    )
 
+    target_code = get_language_code(
+        target_language
+    )
 
-def translate_segments(segments, target_language):
+    
+    if source_code == target_code:
+        return text
 
-    target_language = get_language_code(target_language)
+    try:
 
+       
+        tokenizer.src_lang = source_code
 
-    translated_segments = []
+        inputs = tokenizer(
+            text,
+            return_tensors="pt",
+            padding=True,
+            truncation=True,
+            max_length=512
+        )
 
+       
+        forced_bos_token_id = (
+            tokenizer.convert_tokens_to_ids(
+                target_code
+            )
+        )
 
-    for segment in segments:
+        translated_tokens = model.generate(
+            **inputs,
+            forced_bos_token_id=forced_bos_token_id,
+            max_length=512
+        )
 
-        translated_text = translate_text(
-            segment["text"],
-            target_language
+        translated_text = tokenizer.batch_decode(
+            translated_tokens,
+            skip_special_tokens=True
+        )[0]
+
+        return translated_text.strip()
+
+    except Exception as e:
+
+        raise RuntimeError(
+            f"NLLB translation failed: {str(e)}"
         )
 
 
+
+
+def translate_segments(
+    segments: list,
+    source_language: str,
+    target_language: str
+) -> list:
+
+    translated_segments = []
+
+    for segment in segments:
+
+        original_text = segment.get(
+            "text",
+            ""
+        ).strip()
+
+        if not original_text:
+            continue
+
+        translated_text = translate_text(
+            original_text,
+            source_language,
+            target_language
+        )
+
         translated_segments.append({
 
-            "start": segment["start"],
+            "start":
+                segment.get("start", 0),
 
-            "end": segment["end"],
+            "end":
+                segment.get("end", 0),
 
-            "original_text": segment["text"],
+            "original_text":
+                original_text,
 
-            "translated_text": translated_text
-
+            "translated_text":
+                translated_text
         })
-
 
     return translated_segments
